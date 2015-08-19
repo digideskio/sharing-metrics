@@ -1,0 +1,42 @@
+{
+  "name": "sharing-metrics",
+  "version": "1.0.0",
+  "description": "Asynchronous social sharing metrics",
+  "main": "src/shares.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "keywords": [
+    "social",
+    "share",
+    "sharing",
+    "icons",
+    "count",
+    "metrics",
+    "facebook",
+    "twitter",
+    "pinterest"
+  ],
+  "author": "Newsela",
+  "license": "MIT",
+  "dependencies": {
+    "async": "^1.4.2",
+    "request": "^2.60.0"
+  },
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "mocha": "^2.2.5"
+  },
+  "directories": {
+    "example": "example",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/newsela/sharing-metrics.git"
+  },
+  "bugs": {
+    "url": "https://github.com/newsela/sharing-metrics/issues"
+  },
+  "homepage": "https://github.com/newsela/sharing-metrics#readme"
+}
