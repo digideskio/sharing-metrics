@@ -1,6 +1,6 @@
 {
   "name": "sharing-metrics",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Asynchronous social sharing metrics",
   "main": "src/shares.js",
   "scripts": {
