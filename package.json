@@ -1,6 +1,6 @@
 {
   "name": "sharing-metrics",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Asynchronous social sharing metrics",
   "main": "src/shares.js",
   "scripts": {
@@ -20,8 +20,7 @@
   "author": "Newsela",
   "license": "MIT",
   "dependencies": {
-    "async": "^1.4.2",
-    "request": "^2.60.0"
+    "async": "^1.4.2"
   },
   "devDependencies": {
     "chai": "^3.2.0",
