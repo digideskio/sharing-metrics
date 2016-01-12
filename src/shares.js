@@ -1,6 +1,6 @@
 'use strict';
 
-var request = require('request');
+var http = require('http');
 var async = require('async');
 var parser = require('./parser');
 
@@ -9,12 +9,7 @@ var parser = require('./parser');
 var THE_API_ENDPOINTS = {
   'facebook': {
     enabled: true,
-    url: 'https://api.facebook.com/method/links.getStats?format=json&urls='
-  },
-
-  'twitter': {
-    enabled: true,
-    url: 'http://urls.api.twitter.com/1/urls/count.json?url='
+    url: 'http://api.facebook.com/method/links.getStats?format=json&urls='
   },
 
   'pinterest': {
@@ -25,26 +20,27 @@ var THE_API_ENDPOINTS = {
 
 
 /********************************************************************
-* HELPER FUNCTIONS
-*********************************************************************/
-var requestShareCount = function(url, callback) {
-  request.get(url, function(error, res, body) {
-    if (error) {
-      callback(error);
-    } else {
-      callback(null, body);
-    }
-  });
-};
-
-
-/********************************************************************
 * MODULE EXPORTS
 *********************************************************************/
-exports.getProviders = function() {
-  return THE_API_ENDPOINTS;
-};
+exports.THE_API_ENDPOINTS = THE_API_ENDPOINTS;
 
+exports._request = function(url, callback) {
+  http.get(url, function(res) {
+    var data = '';
+
+    res.on('data', function(chunk) {
+      data += chunk;
+    });
+
+    res.on('end', function() {
+      return callback(null, data, res);
+    });
+
+    res.on('error', function(error) {
+      return callback(error);
+    });
+  });
+};
 
 exports.enable = function(provider) {
   THE_API_ENDPOINTS[provider].enabled = true;
@@ -54,7 +50,6 @@ exports.enable = function(provider) {
 exports.disable = function(provider) {
   THE_API_ENDPOINTS[provider].enabled = false;
 };
-
 
 exports.getCount = function(sharedUrl, callback) {
   // Intialize the tally results.
@@ -66,7 +61,7 @@ exports.getCount = function(sharedUrl, callback) {
     if (!endpoint.enabled) { return callback(); }
 
     var url = endpoint.url + sharedUrl;
-    requestShareCount(url, function(error, body) {
+    exports._request(url, function(error, body) {
       // Something went wrong with the request, so set the provider's
       // tally to 0, and ignore the callback(error).
       if (error) {
