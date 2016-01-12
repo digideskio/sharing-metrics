@@ -9,10 +9,9 @@ npm install sharing-metrics --save
 ```
 
 ### API Providers
-These are the available providers. By default only facebook and twitter share counts are enabled.
+These are the available providers.
 
 - facebook: `https://api.facebook.com/method/links.getStats?format=json&urls=`
-- twitter: `http://urls.api.twitter.com/1/urls/count.json?url=`
 - pinterest: `http://api.pinterest.com/v1/urls/count.json?url=`
 
 ### Documentation
@@ -37,7 +36,7 @@ shares.getCount(url, function(error, tally) {
 
 **Sample output**
 ```
-{ total: 1, twitter: 0, pinterest: 1 }
+{ total: 1, pinterest: 1 }
 ```
 
 ### Contributions

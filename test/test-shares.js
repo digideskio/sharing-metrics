@@ -5,9 +5,9 @@ var shares = require('../src/shares');
 
 describe('shares', function() {
 
-  describe('.isObject()', function() {
-    var providers = shares.getProviders();
+  var providers = shares.THE_API_ENDPOINTS;
 
+  describe('.isObject()', function() {
     it('should expose the API providers for public use', function() {
       assert.isObject(providers);
     });
@@ -16,29 +16,19 @@ describe('shares', function() {
       assert.property(providers, 'facebook');
     });
 
-    it('should contain the twitter share provider', function() {
-      assert.property(providers, 'twitter');
-    });
-
     it('should contain the pinterest share provider', function() {
       assert.property(providers, 'pinterest');
     });
   });
 
-
   describe('.enable()', function() {
-    var providers = shares.getProviders();
-
     it('should enable the given provider', function() {
       shares.enable('pinterest');
       assert.isTrue(providers.pinterest.enabled);
     });
   });
 
-
   describe('.disable()', function() {
-    var providers = shares.getProviders();
-
     it('should disbale the given provider', function() {
       shares.disable('facebook');
       assert.isFalse(providers.facebook.enabled);
